@@ -3,5 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="zhops">Zhops</string>
+    <string name="profile">Профиль</string>
+    <string name="parties_nearby">Вечеринки поблизости</string>
+    <string name="new_party">Новая вечеринка</string>
+    <string name="but3">Кнопка 3</string>
+    <string name="but4">Кнопка 4</string>
     <string name="action_settings">Settings</string>
 </resources>
