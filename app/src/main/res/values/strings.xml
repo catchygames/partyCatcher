@@ -6,7 +6,17 @@
     <string name="profile">Профиль</string>
     <string name="parties_nearby">Вечеринки поблизости</string>
     <string name="new_party">Новая вечеринка</string>
-    <string name="but3">Кнопка 3</string>
-    <string name="but4">Кнопка 4</string>
+    <string name="list">Список</string>
+    <string name="friends_parties">Вечеринки друзей</string>
     <string name="action_settings">Settings</string>
+    <string name="party_name">Название вечеринки</string>
+    <string name="party_theme">Тематика</string>
+    <string name="party_dresscode">Дресс-код</string>
+    <string name="party_guests_count">Количество гостей</string>
+    <string name="party_species">Дополнительные особенности</string>
+    <string name="species_example">Пример:"Только безалкогольные напитки"</string>
+    <string name="party_place">Местро проведения</string>
+    <string name="my_place">Я на месте</string>
+    <string name="party_icon">Значок на карте</string>
+    <string name="submit_party">Готово</string>
 </resources>
