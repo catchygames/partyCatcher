@@ -2,5 +2,6 @@
     <string name="app_name">partyCatcher</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="zhops">Zhops</string>
     <string name="action_settings">Settings</string>
 </resources>
