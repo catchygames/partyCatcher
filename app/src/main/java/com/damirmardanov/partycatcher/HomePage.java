@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+
 /**
  * Created by damir on 20.09.16.
  */
@@ -52,7 +57,8 @@ public class HomePage extends android.support.v4.app.Fragment implements View.On
             }
             case R.id.nearby_button:
             {
-                ft.add(R.id.FrameContent, new NearbyParties()).hide(this).commit();
+                NearbyParties mapFragment = new NearbyParties();
+                ft.add(R.id.FrameContent, mapFragment).hide(this).commit();
                 break;
             }
         }

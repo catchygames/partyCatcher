@@ -11,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
