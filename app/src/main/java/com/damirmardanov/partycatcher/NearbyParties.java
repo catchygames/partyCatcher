@@ -1,15 +1,23 @@
 package com.damirmardanov.partycatcher;
 
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -27,32 +35,30 @@ public class NearbyParties extends android.support.v4.app.Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.nearby_parties, container, false);
-        ((SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
+        SupportMapFragment mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+        mapFragment.getMapAsync(this);
         return view;
-    }
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onViewCreated(view, savedInstanceState);
-        // here, as doc say, the map can be initialized, or the service is not available
-        //initilizeMap();
-    }
-
-    private void initilizeMap() {
-        if (googleMap == null) {
-            ((SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
-
-            // check if map is created successfully or not
-            /*if (googleMap == null) {
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
-                        .show();
-            }*/
-        }
     }
 
     @Override
     public void onMapReady(GoogleMap mGoogleMap) {
         googleMap = mGoogleMap;
+        googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
+        googleMap.setMyLocationEnabled(true);
+
+        UiSettings mapSettings = googleMap.getUiSettings();
+        mapSettings.setZoomControlsEnabled(true);
+        mapSettings.setZoomGesturesEnabled(true);
+        mapSettings.setMyLocationButtonEnabled(true);
     }
+
+    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
+        @Override
+        public void onMyLocationChange(Location location) {
+            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+            if (googleMap != null) {
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 17.0f));
+            }
+        }
+    };
 }
