@@ -1,15 +1,24 @@
 package com.damirmardanov.partycatcher;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,13 +28,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * Created by damir on 20.09.16.
  */
 public class NearbyParties extends android.support.v4.app.Fragment
-    implements OnMapReadyCallback {
+    implements OnMapReadyCallback{
     private GoogleMap googleMap;
     /**
      * function to load map. If map is not created it will create it for you
@@ -43,7 +53,6 @@ public class NearbyParties extends android.support.v4.app.Fragment
     @Override
     public void onMapReady(GoogleMap mGoogleMap) {
         googleMap = mGoogleMap;
-        googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
         googleMap.setMyLocationEnabled(true);
 
         UiSettings mapSettings = googleMap.getUiSettings();
@@ -51,14 +60,4 @@ public class NearbyParties extends android.support.v4.app.Fragment
         mapSettings.setZoomGesturesEnabled(true);
         mapSettings.setMyLocationButtonEnabled(true);
     }
-
-    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
-        @Override
-        public void onMyLocationChange(Location location) {
-            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-            if (googleMap != null) {
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 17.0f));
-            }
-        }
-    };
 }
